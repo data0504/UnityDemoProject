@@ -5,3 +5,5 @@
 /*.sln
 /*.csproj
 
+/.vs
+/obj
