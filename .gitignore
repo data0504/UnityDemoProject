@@ -2,8 +2,8 @@
 /Temp
 /UserSettings
 /Logs
+/obj
 /*.sln
 /*.csproj
 
-/.vs
-/obj
+
