@@ -903,7 +903,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7D2B\u8272\u7684\u5F97\u5206 : 0"
+  m_Text: 'PurpleScore : 0'
 --- !u!222 &543400123
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1030,7 +1030,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7DA0\u8272\u7684\u5F97\u5206 : 0"
+  m_Text: 'GreenScore : 0'
 --- !u!222 &694546811
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1083,7 +1083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746861096}
   m_Layer: 0
-  m_Name: GameObject_Dynamic
+  m_Name: Dynamic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1831,7 +1831,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7E3D\u5F97\u5206 : 0"
+  m_Text: 'TotalScore : 0'
 --- !u!222 &1086303022
 CanvasRenderer:
   m_ObjectHideFlags: 0
