@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class BubbbleData
+public class BubbleInfo
 {
     public GameObject isBubble;
     public string message;
-    public bool leftRight;
+    public bool id;
 
-    public float stepVertical; 
-    public float stepHorizontal; 
-    public float widthTotalCount; 
-    public float maxTextWidth; 
+    public float ChatHieght; 
+    public float ChatWidht; 
+    public float BubblePosY; 
+    public float maxContentRowNumber; 
 
     private Text isBubbleText;
     public float lastPos; 
@@ -26,8 +26,8 @@ public class BubbbleData
     {
         float halfHeadLength = isBubble.GetComponent<RectTransform>().rect.height / 2;
 
-        float hpos = leftRight ? stepHorizontal / 2 : -stepHorizontal / 2;
-        float vPos = stepVertical - isBubble.GetComponent<RectTransform>().sizeDelta.y - lastPos;
+        float hpos = id ? ChatWidht / 2 : -ChatWidht / 2;
+        float vPos = ChatHieght - isBubble.GetComponent<RectTransform>().sizeDelta.y - lastPos;
         lastPos += isBubble.GetComponent<RectTransform>().sizeDelta.y + halfHeadLength;
 
         isBubble.GetComponent<RectTransform>().localPosition = new Vector2(hpos, vPos);
@@ -44,7 +44,7 @@ public class BubbbleData
         int widthNumber = 0;
         float currentWidth = isBubbleText.preferredWidth;
 
-        for (int i = 0; i < widthTotalCount; i++)
+        for (int i = 0; i < BubblePosY; i++)
         {
             if (currentWidth < totalWidth) break;
             totalWidth += singleWidth;
@@ -58,15 +58,15 @@ public class BubbbleData
         }
 
         Debug.Log($"{isBubbleText.preferredWidth}");
-        if (isBubbleText.preferredWidth >= maxTextWidth)
+        if (isBubbleText.preferredWidth >= maxContentRowNumber)
         {
-            isBubbleText.GetComponent<LayoutElement>().preferredWidth = maxTextWidth;
+            isBubbleText.GetComponent<LayoutElement>().preferredWidth = maxContentRowNumber;
         }
 
         float singleHeight = 16f;
         float currentHeight = isBubbleText.preferredHeight;
 
-        float heightTotalCount = Mathf.RoundToInt(currentHeight / (singleHeight * widthTotalCount));
+        float heightTotalCount = Mathf.RoundToInt(currentHeight / (singleHeight * BubblePosY));
         if (heightTotalCount > 1)
         {
             for (int index = 1; index <= heightTotalCount; index++)
@@ -129,44 +129,45 @@ public class ContentData
 
 public class MessageInfo : MonoBehaviour
 {
-    public GameObject rigthChat;
-    public GameObject leftChat;
-    public GameObject chatpanel;
-    public float stepVertical;
-    public float stepHorizontal;
-    public float widthTotalCount;
-    public float maxTextWidth; 
+    public GameObject ChatRigth;
+    public GameObject ChatLeft;
+    public GameObject ChatRange;
+    public float BubblePosY;
+    public float ChatWidht = 1000f;
+    public float ChatHieght = 570f;
 
-    private float lastPos; 
+    private float maxContentRowNumber = 140f;
+    private float lastPos = 0.0f;
 
-    public void Init()
+
+    public float GetLastPosY()
     {
-        lastPos = 0.0f;
+        return lastPos;
     }
 
-    public void AddBubble(string content, bool isMy)
+    public void AddBubble(string content, bool id)
     {
-        BubbbleData bubbbleData = new()
+        BubbleInfo bubbbleData = new()
         {
-            isBubble = NewContent(isMy),
+            isBubble = NewContent(id),
             message = content,
-            leftRight = isMy,
+            id = id,
 
-            stepVertical = stepVertical,
-            stepHorizontal = stepHorizontal,
-            widthTotalCount = widthTotalCount,
-            maxTextWidth = maxTextWidth,
+            ChatHieght = ChatHieght,
+            ChatWidht = ChatWidht,
+            BubblePosY = BubblePosY,
+            maxContentRowNumber = maxContentRowNumber,
 
             lastPos = lastPos
         };
         ContentData contentData = new()
         {
-            contentRectTransform = chatpanel.transform.Find("ViewPort").Find("Content").GetComponent<RectTransform>(),
-            currentContentChildNumber = chatpanel.transform.Find("ViewPort").Find("Content").childCount
+            contentRectTransform = ChatRange.transform.Find("ViewPort").Find("Content").GetComponent<RectTransform>(),
+            currentContentChildNumber = ChatRange.transform.Find("ViewPort").Find("Content").childCount
         };
         ScrollbarData scrollbarData = new()
         {
-            isScrollbar = chatpanel.transform.Find("Scrollbar").GetComponent<Scrollbar>(),
+            isScrollbar = ChatRange.transform.Find("Scrollbar").GetComponent<Scrollbar>(),
             currentContentChildNumber = contentData.currentContentChildNumber,
             childNumberLimit = 7
         };
@@ -177,24 +178,9 @@ public class MessageInfo : MonoBehaviour
         scrollbarData.Start();
         contentData.ContentChatY(scrollbarData.onOff);
     }
-    public void DragScrollbar()
-    {
-        Scrollbar isScrollbar = chatpanel.transform.Find("Scrollbar").GetComponent<Scrollbar>();
-        RectTransform contentRectTransform = chatpanel.transform.Find("ViewPort").Find("Content").GetComponent<RectTransform>();
-        float x = contentRectTransform.localPosition.x;
-        float y = contentRectTransform.localPosition.y;
-        float reslut = 0;
-
-        if (lastPos < 1050) return;
-        if (lastPos > 1050) reslut = lastPos - 1050;
-        if (reslut < 0) reslut = 0;
-
-        float cooperate = isScrollbar.value * reslut;
-        contentRectTransform.localPosition = new Vector2(x, cooperate);
-    }
     private GameObject NewContent(bool isMy)
     {
-        RectTransform contentRectTransform = chatpanel.transform.Find("ViewPort").Find("Content").GetComponent<RectTransform>();
-        return isMy ? Instantiate(rigthChat, contentRectTransform) : Instantiate(leftChat, contentRectTransform);
+        RectTransform contentRectTransform = ChatRange.transform.Find("ViewPort").Find("Content").GetComponent<RectTransform>();
+        return isMy ? Instantiate(ChatRigth, contentRectTransform) : Instantiate(ChatLeft, contentRectTransform);
     }
 }

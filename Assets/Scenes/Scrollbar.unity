@@ -204,13 +204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736e7d149dac31c4c84d330aabc5db14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigthChat: {fileID: 8552461674330044895, guid: 27656d56f86e6b242925de913d93fea4, type: 3}
-  leftChat: {fileID: 8552461674330044895, guid: 004fa9681beba3141ad43ce87fb71d6b, type: 3}
-  chatpanel: {fileID: 1750980422}
-  stepVertical: 570
-  stepHorizontal: 1000
-  widthTotalCount: 3
-  maxTextWidth: 140
+  ChatRigth: {fileID: 8552461674330044895, guid: 27656d56f86e6b242925de913d93fea4, type: 3}
+  ChatLeft: {fileID: 8552461674330044895, guid: 004fa9681beba3141ad43ce87fb71d6b, type: 3}
+  ChatRange: {fileID: 1750980422}
+  BubblePosY: 0
+  ChatWidht: 1000
+  ChatHieght: 570
 --- !u!1 &296923247
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +277,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &591670742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591670744}
+  - component: {fileID: 591670743}
+  m_Layer: 0
+  m_Name: ScrollbarInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &591670743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591670742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e97a6e9d90de43b55db5f2f334dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChatRange: {fileID: 1750980423}
+--- !u!4 &591670744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591670742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613439957
 GameObject:
@@ -712,7 +756,7 @@ RectTransform:
   m_Children:
   - {fileID: 1750980423}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -873,6 +917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageInfo: {fileID: 153249083}
+  scrollbarInfo: {fileID: 591670743}
   inputtext: {fileID: 0}
 --- !u!1 &2067988837
 GameObject:
