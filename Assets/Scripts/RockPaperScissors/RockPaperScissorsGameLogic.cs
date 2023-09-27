@@ -50,7 +50,12 @@ public class RockPaperScissorsGameLogic : MonoBehaviour
     public TextAll TextAll;
     public ButtonAll ButtonAll;
     public PercentageTextAll PercentageTextAll;
-    private int lose = 90, win = 9, tie = 1, weights; 
+    public int Lose = 90;
+    public int Win = 9;
+    public int Tie = 1;
+    private int Weights;
+
+
 
     private int  orderPaper, orderRock, orderScissors, orderTotal; 
     private string percentParper, percentRock,  percentScissors, percentTotal;
@@ -79,25 +84,25 @@ public class RockPaperScissorsGameLogic : MonoBehaviour
     private void Parser(int decide, int user)
     {
         resultText = "";
-        int level = lose;
+        int level = Lose;
         if (decide < level)
         {
             resultText += $"{loseText},Robot is";
-            Reason(user, lose);
+            Reason(user, Lose);
             return;
         }
-        level += win;
+        level += Win;
         if (decide < level)
         {
             resultText += $"{winText},Robot is";
-            Reason(user, win);
+            Reason(user, Win);
             return;
         }
-        level += tie;
+        level += Tie;
         if (decide < level)
         {
             resultText += $"{tieText},Robot is";
-            Reason(user, tie);
+            Reason(user, Tie);
             return;
         }
     }
@@ -105,7 +110,7 @@ public class RockPaperScissorsGameLogic : MonoBehaviour
     {
         List<string> prsStr = new List<string> { "Scissors", "Paper", "Rock" };
 
-        if (level == lose)
+        if (level == Lose)
         {
             for (int i = 0; i < prsStr.Count; i++)
             {
@@ -131,7 +136,7 @@ public class RockPaperScissorsGameLogic : MonoBehaviour
         }
 
         prsStr = new List<string> { "Rock", "Scissors", "Paper" };
-        if (level == win)
+        if (level == Win)
         {
             for (int i = 0; i < prsStr.Count; i++)
             {
@@ -156,7 +161,7 @@ public class RockPaperScissorsGameLogic : MonoBehaviour
         }
 
         prsStr = new List<string> { "Paper", "Rock", "Scissors" };
-        if (level == tie)
+        if (level == Tie)
         {
             for (int i = 0; i < prsStr.Count; i++)
             {
@@ -266,8 +271,8 @@ public class RockPaperScissorsGameLogic : MonoBehaviour
     }
     private  int  AiRondom()
     {
-        weights = lose + win + tie;
-        return  Random.Range(0, weights);
+        Weights = Lose + Win + Tie;
+        return  Random.Range(0, Weights);
     }
     private void TextALL()
     {

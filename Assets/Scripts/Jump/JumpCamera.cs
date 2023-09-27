@@ -19,6 +19,16 @@ public class JumpCamera : MonoBehaviour
     {
         return isCamera.position.y;
     }
+    public void SetCameraCurrentCenterPonit(float Pos)
+    {
+        Vector3 newPos = new()
+        {
+            x = isCamera.position.x,
+            y = Pos,
+            z = isCamera.position.z
+        };
+        isCamera.position = newPos;
+    }
     public void FollowObject(float isTrianglePosY, float maxSpace, float lowSpace)
     {
         // level_01 ALL Follow

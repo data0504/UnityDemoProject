@@ -168,10 +168,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flyLogic:
-    ButterflyPresetObj: {fileID: 7410711621002038521, guid: 36e31a6b244d21d46b63c79b129b79fe, type: 3}
-    FlinghtRangeObj: {fileID: 1384129163}
-    FlyingPosXSpace: 1
-    delayTime: 0.075
+    PrefabButterfly: {fileID: 7410711621002038521, guid: 36e31a6b244d21d46b63c79b129b79fe, type: 3}
+    ObjFlinghtRange: {fileID: 1384129163}
+    RowFlyingSpace: 1
+    DelayTime: 0.075
+    MaxColunmMovePosition: 350
 --- !u!1 &1384129159
 GameObject:
   m_ObjectHideFlags: 0

@@ -1534,6 +1534,9 @@ MonoBehaviour:
     PercentageScisson: {fileID: 1448205516}
     Orderall: {fileID: 725726022}
     PercentageElenent: {fileID: 1253320187}
+  Lose: 90
+  Win: 9
+  Tie: 1
 --- !u!4 &1782557931
 Transform:
   m_ObjectHideFlags: 0

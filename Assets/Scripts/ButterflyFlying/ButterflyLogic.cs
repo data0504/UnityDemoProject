@@ -5,29 +5,28 @@ using Random = UnityEngine.Random;
 [Serializable]
 public class FlyLogic
 {
-    public GameObject ButterflyPresetObj;
-    public RectTransform FlinghtRangeObj;
+    public GameObject PrefabButterfly;
+    public RectTransform ObjFlinghtRange;
 
     public float RowFlyingSpace = 1f;
     public float DelayTime = 0.075f;
     public float MaxColunmMovePosition = 350f;
 
-    private GameObject butterfly;
-    private RectTransform butterflyRectTransform;
-
+    private GameObject Objbutterfly;
+    private RectTransform Rectbutterfly;
 
     private float currentTime;
 
     public void Init()
     {
-        butterfly = GameObject.Instantiate(ButterflyPresetObj, FlinghtRangeObj);
-        butterflyRectTransform = butterfly.GetComponent<RectTransform>();
+        Objbutterfly = GameObject.Instantiate(PrefabButterfly, ObjFlinghtRange);
+        Rectbutterfly = Objbutterfly.GetComponent<RectTransform>();
         Vector2 presetPosition = new()
         {
-            x = -FlinghtRangeObj.anchoredPosition.x,
-            y = butterfly.GetComponent<RectTransform>().anchoredPosition.y
+            x = -ObjFlinghtRange.anchoredPosition.x,
+            y = Rectbutterfly.anchoredPosition.y
         };
-        butterflyRectTransform.anchoredPosition = presetPosition;
+        Rectbutterfly.anchoredPosition = presetPosition;
     }
     private void Move(RectTransform butterflyRectTransform, float randomPosY)
     {
@@ -44,7 +43,7 @@ public class FlyLogic
         currentTime += Time.deltaTime;
         if (currentTime > DelayTime)
         {
-            Move(butterflyRectTransform, Random.Range(-MaxColunmMovePosition, MaxColunmMovePosition));
+            Move(Rectbutterfly, Random.Range(-MaxColunmMovePosition, MaxColunmMovePosition));
 
             currentTime = DelayTime - currentTime;
         }

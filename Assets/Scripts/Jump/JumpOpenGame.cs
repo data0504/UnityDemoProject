@@ -24,6 +24,7 @@ public class JumpOpenGame : MonoBehaviour
     #endregion
     public void GameReplay()
     {
+        CameraData.SetCameraCurrentCenterPonit(0);
         int randonRepalyMethod = Random.Range(0, 1);
         randonRepalyMethod = 1;
         if (randonRepalyMethod == 0) Replay();
