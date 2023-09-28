@@ -99,7 +99,7 @@ public class ColunmAnimContorl : MonoBehaviour
         if (GameScore.SlotMachineAutoPlay)
         {
             RoundOneAnima();
-            Invoke("OnAutoPlay", Time.deltaTime);
+            Invoke("OnAutoPlay",0.001f);
         }
 
         colunmAnimInfo.MonoitorRunOne();
