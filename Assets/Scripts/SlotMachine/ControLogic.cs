@@ -28,6 +28,7 @@ public class ControLogic : MonoBehaviour
     private bool AutoResultVeiwOn;
 
     private bool animaSameOff;
+    private List<GameObject> ObjColunm = new List<GameObject>();
 
 
     private List<GameObject> bingolinesList = new();
@@ -54,8 +55,10 @@ public class ControLogic : MonoBehaviour
         {
             for (int i = 0; i < ColumnNumber; i++)
             {
-                GameObject colunm = GameObject.Find("Canvas/ColunmRange").transform.GetChild(i).gameObject;
-                colunm.GetComponent<ColunmAnimLogic>().AnimaTime = timeNumber;
+                ColunmAnimContorl colunm = ObjColunm[i].GetComponent<ColunmAnimContorl>();
+                colunm.colunmAnimInfo.AnimaTime = timeNumber;
+                //GameObject colunm = GameObject.Find("Canvas/ColunmRange").transform.GetChild(i).gameObject;
+                //colunm.GetComponent<ColunmAnimContorl>().AnimaTime = timeNumber;
             }
             ObjAnimSame.GetComponent<Image>().color = Color.red; 
             animaSameOff = true;
@@ -64,8 +67,10 @@ public class ControLogic : MonoBehaviour
         {
             for (int i = 0; i < ColumnNumber; i++)
             {
-                GameObject colunm = GameObject.Find("Canvas/ColunmRange").transform.GetChild(i).gameObject;
-                colunm.GetComponent<ColunmAnimLogic>().AnimaTime = timeNumber;
+                ColunmAnimContorl colunm = ObjColunm[i].GetComponent<ColunmAnimContorl>();
+                colunm.colunmAnimInfo.AnimaTime = timeNumber;
+                //GameObject colunm = GameObject.Find("Canvas/ColunmRange").transform.GetChild(i).gameObject;
+                //colunm.GetComponent<ColunmAnimContorl>().AnimaTime = timeNumber;
                 timeNumber += 2f;
             }
             ObjAnimSame.GetComponent<Image>().color = Color.white;
@@ -159,15 +164,17 @@ public class ControLogic : MonoBehaviour
             };
 
             GameObject columnObj = Instantiate(PerfabColumn, ObjColunmRenge.GetComponent<Transform>());
-            ColunmAnimLogic colunm = columnObj.GetComponent<ColunmAnimLogic>();
+
+            ColunmAnimContorl colunm = columnObj.GetComponent<ColunmAnimContorl>();
             colunm.Init(ObjHandButton, ObjAutoButton);
             columnObj.name = $"column{i}";
 
             rowNumber = colunm.PerfabTextList.Count;
-            colunm.AnimaTime = lastTime;
+            //colunm.colunmAnimInfo.AnimaTime = lastTime;
             lastTime += 2;
 
             columnObj.GetComponent<RectTransform>().anchoredPosition = currentPos;
+            ObjColunm.Add(columnObj);
         }
 
         RectTransform windowSlotRectObj = ObjColunmRenge.GetComponent<RectTransform>();
@@ -194,8 +201,8 @@ public class ControLogic : MonoBehaviour
                     SetScaleBingoLines(i, scoreList);
                     GameScore.SlotMachineShowResult(scoreList, ColumnNumber);
 
-                    scoreList.Clear();
                     resultRowList.Clear();
+                    scoreList.Clear();
                 }
                 InitGameScoreSlotMachineValue();
 
@@ -206,7 +213,6 @@ public class ControLogic : MonoBehaviour
 
         if (AutoResultVeiwOn)
         {
-            
             currentTime += Time.deltaTime;
             if (currentTime >= OneRoundTime)
             {
@@ -218,8 +224,8 @@ public class ControLogic : MonoBehaviour
                     SetScaleBingoLines(i, scoreList);
                     GameScore.SlotMachineShowResult(scoreList, ColumnNumber);
 
-                    scoreList.Clear();
                     resultRowList.Clear();
+                    scoreList.Clear();
                 }
                 PlayingAutoNumberZeroStop();
 
@@ -227,7 +233,6 @@ public class ControLogic : MonoBehaviour
 
                 currentTime = cleanTime;
             }
-
         }
     }
 

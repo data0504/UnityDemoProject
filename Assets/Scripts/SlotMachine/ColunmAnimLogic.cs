@@ -1,100 +1,57 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
-public class ColunmAnimLogic : MonoBehaviour
+//ColunmAnimModel
+
+public class ColunmAnimLogic
 {
-    public Animator AnimaObj;
-    public AnimationClip AnimaClip;
-    public float AnimaTime = 3f;
-    public List<Text> PerfabTextList = new();
+    public float AnimaTime;
+    public int PerfabTextNumber;
     public bool LogOff;
 
+    public List<int> resultRef = new() { 1, 2, 3, 4, 5, 7 };
+    public List<int> resultList;
+    public int rowNumber;
 
-    private Button ObjHandButton;
-    private Button ObjAutoButton;
-    private List<int> resultRef = new() { 1, 2, 3, 4, 5, 7 };
-    private List<int> resultList;
-    private int rowNumber;
+    public bool sutureLoopOff;
+    public bool autoPlayOff;
 
-    private bool sutureLoopOff;
-    private bool autoPlayOff;
+    public bool monitorOneRoundLoopTimeOff;
+    public List<int> LuckyNumberList;
 
-    private bool monitorOneRoundLoopTimeOff;
-    private List<int> sevenNumberIndex;
+    public float AnimaClipLenght;
+    public float keepCurrentTime;
+    public const int cleanTime = 0;
 
-    private float AnimaClipLenght;
-    private float keepCurrentTime;
-    private const int cleanTime = 0;
+    public int resultIndex;
+    public const int cleanResultIndex = 0;
 
-    private int resultIndex;
-    private const int cleanResultIndex = 0;
-
-    public void Init(Button objHandButton, Button objAutoButton)
+    public void CreateRandomResult()
     {
-        ObjHandButton = objHandButton;
-        ObjHandButton.onClick.AddListener(PlayHand);
-
-        ObjAutoButton = objAutoButton;
-        ObjAutoButton.onClick.AddListener(PlayAuto);
-
-        AnimaClipLenght = AnimaClip.length;
-        rowNumber = PerfabTextList.Count - 1;
-        CreateRandomText();
-    }
-
-    private void PlayHand()
-    {
-        if (!GameScore.SlotMachineUnlockOneRound)
+        resultList = null;
+        resultList = new List<int>();
+        for (int i = 0; i < rowNumber; i++)
         {
-            RoundOneAnima("HandLoopSlot");
-        }
-    }
-
-
-    private void PlayAuto()
-    {
-        if (GameScore.SlotMachineSetAutoNumber > 0)
-        {
-            if (!GameScore.SlotMachineAutoPlay)
-            {
-                if (!GameScore.SlotMachineUnlockOneRound)
-                {
-                    RoundOneAnima("AutoLoopSlot");
-                }
-            }
-        }
-    }
-    private void RoundOneAnima(string method)
-    {
-        RandomResult();
-        GetSevenNumberIndex(7);
-        monitorOneRoundLoopTimeOff = true;
-        GameScore.SlotMachineOnSevenColorRed = false;
-
-        if (!sutureLoopOff) AnimaObj.Play("slowAnim", 0, 0);
-        Invoke($"{method}", AnimaClipLenght);
-    }
-    private void CreateRandomText()
-    {
-        for (int i = 0; i < PerfabTextList.Count; i++)
-        {
-            int randomIndex = Random.Range(0, PerfabTextList.Count);
-            PerfabTextList[i].text = resultRef[randomIndex].ToString();
-        }
-    }
-
-
-
-    void Update()
-    {
-        if (GameScore.SlotMachineAutoPlay)
-        {
-            RoundOneAnima("AutoLoopSlot");
-            Invoke("OnAutoPlay", Time.deltaTime);
+            int RandomIndex = Random.Range(0, PerfabTextNumber);
+            resultList.Add(resultRef[RandomIndex]);
         }
 
+        GameScore.SlotMachineColunmList.Add(resultList);
+        GameScore.LogDef(LogOff, string.Join(",", resultList));
+    }
+    public void CheckLuckyNumber(int luckyNumber)
+    {
+        LuckyNumberList = null;
+        LuckyNumberList = new List<int>();
+        for (int i = 0; i < resultList.Count; i++) if (resultList[i] == luckyNumber) LuckyNumberList.Add(i);
+        GameScore.LogDef(LogOff, string.Join(",", LuckyNumberList));
 
+        if (LuckyNumberList.Count == 0) LuckyNumberList = null;
+        else GameScore.SlotMachineKeepSevenNumber += LuckyNumberList.Count;
+    }
+    public void MonoitorRunOne()
+    {
         if (monitorOneRoundLoopTimeOff)
         {
             keepCurrentTime += Time.deltaTime;
@@ -104,124 +61,32 @@ public class ColunmAnimLogic : MonoBehaviour
                 monitorOneRoundLoopTimeOff = false;
             }
         }
-
-        if (sevenNumberIndex != null && GameScore.SlotMachineOnSevenColorRed)
-        {
-            for (int i = 0; i < sevenNumberIndex.Count; i++) PerfabTextList[sevenNumberIndex[i] + 1].color = Color.red;
-            sevenNumberIndex.Clear();
-        }
     }
-    private void OnAutoPlay()
+    public bool AnalyzeToTextRed()
     {
-        GameScore.SetSlotMachineAutoPlay(false);
+        return LuckyNumberList != null && GameScore.SlotMachineOnSevenColorRed;
     }
 
-    private void HandLoopSlot()
+    public bool CheckPlayAuto()
     {
-        if (!monitorOneRoundLoopTimeOff)
+        if (GameScore.SlotMachineSetAutoNumber > 0)
         {
-            if (resultIndex == rowNumber)
+            if (!GameScore.SlotMachineAutoPlay)
             {
-                for (int i = 0; i < PerfabTextList.Count; i++)
+                if (!GameScore.SlotMachineUnlockOneRound)
                 {
-                    if (i == 0) PerfabTextList[i].text = PerfabTextList[i + 1].text.ToString();
-                    else PerfabTextList[i].text = PerfabTextList[i].text.ToString();
+                    return true;
                 }
-
-                resultIndex = cleanResultIndex;
-                sutureLoopOff = true;
-            }
-            else
-            {
-                ResultAnimation();
-                Invoke(nameof(HandLoopSlot), AnimaClipLenght);
             }
         }
-        else
-        {
-            GameScore.SlotMachineUnlockOneRound = true;
-            NormalAnimation();
-            Invoke(nameof(HandLoopSlot), AnimaClipLenght);
-        }
-    }
-    private void AutoLoopSlot()
-    {
-        if (!monitorOneRoundLoopTimeOff)
-        {
-            if (resultIndex == rowNumber)
-            {
-                for (int i = 0; i < PerfabTextList.Count; i++)
-                {
-                    if (i == 0) PerfabTextList[i].text = PerfabTextList[i + 1].text.ToString();
-                    else PerfabTextList[i].text = PerfabTextList[i].text.ToString();
-                }
-
-                resultIndex = cleanResultIndex;
-                sutureLoopOff = true;
-            }
-            else
-            {
-                ResultAnimation();
-                Invoke(nameof(AutoLoopSlot), AnimaClipLenght);
-            }
-        }
-        else
-        {
-            GameScore.SlotMachineUnlockOneRound = true;
-            NormalAnimation();
-            Invoke(nameof(AutoLoopSlot), AnimaClipLenght);
-        }
+        return false;
     }
 
-    private void RandomResult()
+    public void InitAllInfo()
     {
-        for (int i = 0; i < PerfabTextList.Count; i++)
-        {
-            PerfabTextList[i].color = Color.black;
-        }
+        resultIndex = cleanResultIndex;
+        sutureLoopOff = true;
 
-
-        resultList = new();
-        for (int i = 0; i < rowNumber; i++)
-        {
-            int RandomIndex = Random.Range(0, PerfabTextList.Count);
-            resultList.Add(resultRef[RandomIndex]);
-        }
-
-        GameScore.SlotMachineColunmList.Add(resultList);
-        GameScore.LogDef(LogOff, string.Join(",", resultList));
-    }
-    private void GetSevenNumberIndex(int seven)
-    {
-        sevenNumberIndex = new();
-        for (int i = 0; i < resultList.Count; i++) if (resultList[i] == seven) sevenNumberIndex.Add(i);
-        GameScore.LogDef(LogOff, string.Join(",", sevenNumberIndex));
-        if (sevenNumberIndex.Count == 0) sevenNumberIndex = null;
-        else GameScore.SlotMachineKeepSevenNumber += sevenNumberIndex.Count;
-    }
-
-    private void ResultAnimation()
-    {
-        AnimaObj.Play("slowAnim", 0, 0);
-
-        for (int resultIndex = 0; resultIndex < PerfabTextList.Count; resultIndex++)
-        {
-            if (resultIndex == rowNumber)
-            {
-                PerfabTextList[resultIndex].text = resultList[this.resultIndex].ToString();
-                this.resultIndex++;
-            }
-            else PerfabTextList[resultIndex].text = PerfabTextList[resultIndex + 1].text.ToString();
-        }
-    }
-
-    private void NormalAnimation()
-    {
-        AnimaObj.Play("slowAnim", 0, 0);
-        for (int animaIndex = 0; animaIndex < PerfabTextList.Count; animaIndex++)
-        {
-            if (animaIndex == rowNumber) PerfabTextList[animaIndex].text = Random.Range(0, PerfabTextList.Count).ToString();
-            else PerfabTextList[animaIndex].text = PerfabTextList[animaIndex + 1].text.ToString();
-        }
     }
 }
+
