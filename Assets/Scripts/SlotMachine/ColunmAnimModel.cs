@@ -4,28 +4,53 @@ using Random = UnityEngine.Random;
 
 //ColunmAnimModel
 
-public class ColunmAnimLogic
+public class ColunmAnimModel
 {
-    public float AnimaTime;
-    public int PerfabTextNumber;
+    public float LoopTime;
+    public int TextNumber;
     public bool LogOff;
+    public float AnimaClipLength;
+    public int rowNumber;
 
     public List<int> resultRef = new() { 1, 2, 3, 4, 5, 7 };
     public List<int> resultList;
-    public int rowNumber;
 
     public bool sutureLoopOff;
-    public bool autoPlayOff;
 
     public bool monitorOneRoundLoopTimeOff;
     public List<int> LuckyNumberList;
 
-    public float AnimaClipLenght;
     public float keepCurrentTime;
     public const int cleanTime = 0;
 
     public int resultIndex;
     public const int cleanResultIndex = 0;
+
+    public void Init(float LoopTime, bool LogOff, int TextNumber, float AnimaClipLength)
+    {
+        this.LoopTime = LoopTime;
+        this.TextNumber = TextNumber;
+        this.LogOff = LogOff;
+        this.AnimaClipLength = AnimaClipLength;
+        rowNumber = TextNumber - 1;
+    }
+
+    public bool CheckButtonPlayHandState()
+    {
+        if (GameScore.SlotMachineUnlockOneRound) return false;
+        return true;
+    }
+
+    public bool CheckButtonPlayAutoState()
+    {
+        if (GameScore.SlotMachineSetAutoNumber <= 0) return false;
+
+        else if (GameScore.SlotMachineAutoPlay) return false;
+
+        else if (GameScore.SlotMachineUnlockOneRound) return false;
+
+        return true;
+    }
 
     public void CreateRandomResult()
     {
@@ -33,13 +58,14 @@ public class ColunmAnimLogic
         resultList = new List<int>();
         for (int i = 0; i < rowNumber; i++)
         {
-            int RandomIndex = Random.Range(0, PerfabTextNumber);
+            int RandomIndex = Random.Range(0, TextNumber);
             resultList.Add(resultRef[RandomIndex]);
         }
 
         GameScore.SlotMachineColunmList.Add(resultList);
         GameScore.LogDef(LogOff, string.Join(",", resultList));
     }
+
     public void CheckLuckyNumber(int luckyNumber)
     {
         LuckyNumberList = null;
@@ -50,43 +76,28 @@ public class ColunmAnimLogic
         if (LuckyNumberList.Count == 0) LuckyNumberList = null;
         else GameScore.SlotMachineKeepSevenNumber += LuckyNumberList.Count;
     }
-    public void MonoitorRunOne()
+
+    public void MonoitorRunOneOff()
     {
         if (monitorOneRoundLoopTimeOff)
         {
             keepCurrentTime += Time.deltaTime;
-            if (keepCurrentTime > AnimaTime)
+            if (keepCurrentTime > LoopTime)
             {
                 keepCurrentTime = cleanTime;
                 monitorOneRoundLoopTimeOff = false;
             }
         }
     }
+
     public bool AnalyzeToTextRed()
     {
         return LuckyNumberList != null && GameScore.SlotMachineOnSevenColorRed;
     }
 
-    public bool CheckPlayAuto()
-    {
-        if (GameScore.SlotMachineSetAutoNumber > 0)
-        {
-            if (!GameScore.SlotMachineAutoPlay)
-            {
-                if (!GameScore.SlotMachineUnlockOneRound)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public void InitAllInfo()
+    public void ResetLoopInfo()
     {
         resultIndex = cleanResultIndex;
         sutureLoopOff = true;
-
     }
 }
-

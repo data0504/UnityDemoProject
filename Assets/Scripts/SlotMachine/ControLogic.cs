@@ -55,8 +55,8 @@ public class ControLogic : MonoBehaviour
         {
             for (int i = 0; i < ColumnNumber; i++)
             {
-                ColunmAnimContorl colunm = ObjColunm[i].GetComponent<ColunmAnimContorl>();
-                colunm.colunmAnimInfo.AnimaTime = timeNumber;
+                ColunmAnimController colunm = ObjColunm[i].GetComponent<ColunmAnimController>();
+                colunm.colunmAnimModel.LoopTime = timeNumber;
                 //GameObject colunm = GameObject.Find("Canvas/ColunmRange").transform.GetChild(i).gameObject;
                 //colunm.GetComponent<ColunmAnimContorl>().AnimaTime = timeNumber;
             }
@@ -67,8 +67,8 @@ public class ControLogic : MonoBehaviour
         {
             for (int i = 0; i < ColumnNumber; i++)
             {
-                ColunmAnimContorl colunm = ObjColunm[i].GetComponent<ColunmAnimContorl>();
-                colunm.colunmAnimInfo.AnimaTime = timeNumber;
+                ColunmAnimController colunm = ObjColunm[i].GetComponent<ColunmAnimController>();
+                colunm.colunmAnimModel.LoopTime = timeNumber;
                 //GameObject colunm = GameObject.Find("Canvas/ColunmRange").transform.GetChild(i).gameObject;
                 //colunm.GetComponent<ColunmAnimContorl>().AnimaTime = timeNumber;
                 timeNumber += 2f;
@@ -165,12 +165,13 @@ public class ControLogic : MonoBehaviour
 
             GameObject columnObj = Instantiate(PerfabColumn, ObjColunmRenge.GetComponent<Transform>());
 
-            ColunmAnimContorl colunm = columnObj.GetComponent<ColunmAnimContorl>();
+            ColunmAnimController colunm = columnObj.GetComponent<ColunmAnimController>();
             colunm.Init(ObjHandButton, ObjAutoButton);
             columnObj.name = $"column{i}";
 
-            rowNumber = colunm.PerfabTextList.Count;
-            //colunm.colunmAnimInfo.AnimaTime = lastTime;
+
+            rowNumber = colunm.colunmAnimView.PerfabTextList.Count;
+            colunm.colunmAnimModel.LoopTime = lastTime;
             lastTime += 2;
 
             columnObj.GetComponent<RectTransform>().anchoredPosition = currentPos;
