@@ -792,6 +792,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029614664}
   m_CullTransparentMesh: 1
+--- !u!1 &1061973890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061973892}
+  - component: {fileID: 1061973891}
+  m_Layer: 0
+  m_Name: View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1061973891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061973890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b01d6bcfb725c074ab7035c4da1f9670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PerfabColumn: {fileID: 7576455635357825392, guid: df781915222f9724db40236e7a63fa22, type: 3}
+  PerfabBingoLine: {fileID: 8790762255681863134, guid: 4ea13268e01a93f4cbad27e2498941d1, type: 3}
+  ObjColunmRenge: {fileID: 1093659754}
+  ObjAnimSame: {fileID: 2052577362}
+  ObjHandButton: {fileID: 2001998944}
+  ObjAutoButton: {fileID: 597510468}
+  ObjAddButton: {fileID: 682271389}
+  ObjReduceButton: {fileID: 448431651}
+  ObjAutoText: {fileID: 1864022572}
+--- !u!4 &1061973892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061973890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1093659754
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +1015,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477737260}
   m_CullTransparentMesh: 1
+--- !u!1 &1595412763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1595412765}
+  - component: {fileID: 1595412764}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1595412764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595412763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e707f7afc8e8d14581eaf4313d59026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OneRoundTime: 15
+  ColumnNumber: 3
+  WindowWidth: 0
+  currentPosX: 0
+  space: 0
+  RowNumber: 0
+  cleanTime: 0
+  currentTime: 0
+  HandReslutOn: 0
+  AutoResultVeiwOn: 0
+  animaSameOff: 0
+  ObjColunm: []
+  bingolinesList: []
+--- !u!4 &1595412765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595412763}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1692010770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1336,7 @@ RectTransform:
   - {fileID: 448431650}
   - {fileID: 1864022571}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1244,7 +1354,7 @@ GameObject:
   - component: {fileID: 1975438696}
   - component: {fileID: 1975438695}
   m_Layer: 0
-  m_Name: ControllerLogic
+  m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1262,17 +1372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 022921a5ef37aa6478a22b5f4249391e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PerfabColumn: {fileID: 7576455635357825392, guid: df781915222f9724db40236e7a63fa22, type: 3}
-  PerfabBingoLine: {fileID: 8790762255681863134, guid: 4ea13268e01a93f4cbad27e2498941d1, type: 3}
-  ObjColunmRenge: {fileID: 1093659754}
-  ObjAnimSame: {fileID: 2052577362}
-  ObjHandButton: {fileID: 2001998944}
-  ObjAutoButton: {fileID: 597510468}
-  ObjAddButton: {fileID: 682271389}
-  ObjReduceButton: {fileID: 448431651}
-  ObjAutoText: {fileID: 1864022572}
-  OneRoundTime: 12
-  ColumnNumber: 3
+  SlotModel: {fileID: 1595412764}
+  SlotView: {fileID: 1061973891}
 --- !u!4 &1975438696
 Transform:
   m_ObjectHideFlags: 0
@@ -1286,7 +1387,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2001998942
 GameObject:
