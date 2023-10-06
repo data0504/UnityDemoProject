@@ -17,30 +17,14 @@ public class PutMachineLogic : MonoBehaviour
     {
         CreateBalls(2);
         MonitorLoadedPutMachine();
+        MonitorBallSame();
     }
-
     private void CreateBalls(int value)
     {
         for (int i = 0; i < value; i++)
         {
             AddclipBall();
         }
-    }
-    private void AddclipBall()
-    {
-        int RandomBall = Random.Range(0, PrefabList.Count);
-
-        GameObject columnObj = Instantiate(PrefabList[RandomBall], PutMachineClip);
-        columnObj.GetComponent<Rigidbody2D>().simulated = false;
-
-        Vector2 newPos = new Vector2()
-        {
-            x = PutMachineClip.position.x,
-            y = PutMachineClip.position.y
-        };
-        columnObj.GetComponent<Transform>().position = newPos;
-
-        clipList.Add(columnObj);
     }
     private void MonitorLoadedPutMachine()
     {
@@ -57,13 +41,49 @@ public class PutMachineLogic : MonoBehaviour
         Invoke(nameof(MonitorLoadedPutMachine), Time.deltaTime);
     }
 
+    private void MonitorBallSame()
+    {
+        if (GameScore.MergeBallSameCreateBallNumber == 1)
+        {
+            CreateConditionBall(1);
+        }
+        if (GameScore.MergeBallSameCreateBallNumber == 2)
+        {
+            CreateConditionBall(2);
+        }
+        Invoke(nameof(MonitorBallSame), Time.deltaTime);
+    }
+    private void CreateConditionBall(int value)
+    {
+        GameObject newBall = Instantiate(PrefabList[value], TransPutRange);
+        newBall.GetComponent<CircleLogic>().PutRange = TransPutRange;
+        newBall.transform.position = GameScore.MergeBallSameCreateBallPos;
+
+        GameScore.ResetMergeBallSameInfo();
+    }
+    private void AddclipBall()
+    {
+        int RandomBall = Random.Range(0, PrefabList.Count);
+
+        GameObject columnObj = Instantiate(PrefabList[RandomBall], PutMachineClip);
+        columnObj.GetComponent<CircleLogic>().PutRange = TransPutRange;
+        columnObj.GetComponent<Rigidbody2D>().simulated = false;
+
+        Vector2 newPos = new Vector2()
+        {
+            x = PutMachineClip.position.x,
+            y = PutMachineClip.position.y
+        };
+        columnObj.GetComponent<Transform>().position = newPos;
+
+        clipList.Add(columnObj);
+    }
+
     void Update()
     {
         PutPrefabObj();
         MovePutMachine();
     }
-
-
     public void  PutPrefabObj()
     {
         if (Input.GetKeyUp(KeyCode.Space))
@@ -78,7 +98,6 @@ public class PutMachineLogic : MonoBehaviour
             clipList.Remove(clipList[0]);
         }
     }
-
     private void MovePutMachine()
     {
         if (Input.GetKey(KeyCode.LeftArrow))

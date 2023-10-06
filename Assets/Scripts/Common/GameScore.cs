@@ -1,5 +1,6 @@
 using Assets.scripts.AnimImg1;
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class GameScore 
 {
@@ -14,6 +15,9 @@ public static class GameScore
     public static int SlotMachineSetAutoNumber;
     public static bool SlotMachineAutoPlay;
     public static ResultParser slotMachineResultParser;
+
+    public static int MergeBallSameCreateBallNumber;
+    public static Vector2 MergeBallSameCreateBallPos;
 
     public static void LogDef(bool off, string printStr)
     {
@@ -39,7 +43,6 @@ public static class GameScore
         else if (scoreboard[5] == columnNumber) UnityEngine.Debug.Log("恭喜獲得 : 五獎");
         else UnityEngine.Debug.Log("恭喜獲得 : 無獎");
     }
-
     public static void SetSlotMachineAutoPlay(bool off)
     {
         SlotMachineAutoPlay = off;
@@ -50,5 +53,11 @@ public static class GameScore
         //if (slotMachineResultParser == null) slotMachineResultParser = new SlotMachineResultParser();
 
         //slotMachineResultParser.SlotMachineResult1(resultOff, rowNumber, columnNumber, ref resultList, ref OneRound, ref KeepSevenNumber, ref OnSevenColorRed);
+    }
+
+    public static void ResetMergeBallSameInfo()
+    {
+        MergeBallSameCreateBallNumber = 0;
+        MergeBallSameCreateBallPos = new Vector2(0, 0);
     }
 }
