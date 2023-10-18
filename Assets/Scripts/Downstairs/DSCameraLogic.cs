@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class DSCameraLogic : MonoBehaviour
 {
     public Transform ObjCamera;
-    public GameObject PerfabFloor;
+    public GameObject PerfabNormalFloor;
+    public GameObject PerfabShortFloor;
     public Transform ObjFloorRange;
 
     private bool speedLock;
@@ -14,7 +14,8 @@ public class DSCameraLogic : MonoBehaviour
     private float addSpeed = 0.005f;
 
     private float floorsAllHight = 0f;
-    private List<GameObject> floorsList = new List<GameObject>();
+    private GameObject newfloor;
+    private Transform[] floorsList = new Transform[10];
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class DSCameraLogic : MonoBehaviour
         ContinuedCreateFloor();
         MonitorDestoryFloor();
     }
-    private void ContinuedSetDowm()
+    public void ContinuedSetDowm()
     {
         if (!speedLock)
         {
@@ -51,43 +52,53 @@ public class DSCameraLogic : MonoBehaviour
         ObjCamera.position = newCameraPos;
     }
 
-    private void ContinuedCreateFloor()
+    public void ContinuedCreateFloor()
     {
         for (int i = 0; i < 999; i++)
         {
-            if (floorsList.Count < 10)
+            if (ObjFloorRange.childCount < 10)
             {
-                GameObject floor = Instantiate(PerfabFloor, ObjFloorRange);
-                Vector3 newPos = new()
-                {
-                    x = Random.Range(-8, 8),
-                    y = floor.transform.position.y - floorsAllHight,
-                    z = floor.transform.position.z,
-                };
-                floor.transform.position = newPos;
-                floor.transform.name = "floor";
+                int Optionfloors = Random.Range(0, 2);
 
-                float floorsSpace = Random.Range(1, 3);
-                floorsAllHight += floorsSpace;
-
-                floorsList.Add(floor);
+                if (Optionfloors == 0) CreateFloor(PerfabNormalFloor, "Normalfloor", ref floorsList);
+                if (Optionfloors == 1) CreateFloor(PerfabShortFloor, "Shortfloor", ref floorsList);
             }
         }
         Invoke("ContinuedCreateFloor", Time.deltaTime);
     }
-
-    private void MonitorDestoryFloor()
+    private void CreateFloor(GameObject perfabFloor, String name, ref Transform[] floorsList)
     {
-        for (int i = 0; i < floorsList.Count; i++)
+        newfloor = Instantiate(perfabFloor, ObjFloorRange);
+        Vector3 newPos = new()
         {
-            if (floorsList[i].GetComponent<Transform>().position.y > ObjCamera.position.y + 5)
+            x = Random.Range(-8, 8),
+            y = newfloor.transform.position.y - floorsAllHight,
+            z = newfloor.transform.position.z,
+        };
+        newfloor.transform.position = newPos;
+        newfloor.transform.name = name;
+
+        float floorsSpace = Random.Range(1, 3);
+        floorsAllHight += floorsSpace;
+
+        for (int i = 0; i < floorsList.Length; i++)
+        {
+            if (floorsList[i] == null)
             {
-                Destroy(floorsList[i]);
-                floorsList.Remove(floorsList[i]);
+                floorsList[i] = newfloor.transform;
+                break;
             }
+        }
+    }
+    public void MonitorDestoryFloor()
+    {
+        for (int i = 0; i < floorsList.Length; i++)
+        {
+            if (floorsList[i] != null && floorsList[i].position.y > ObjCamera.position.y + 5)
+            { 
+                Destroy(floorsList[i].gameObject);
+            } 
         }
         Invoke("MonitorDestoryFloor", Time.deltaTime);
     }
-
-
 }

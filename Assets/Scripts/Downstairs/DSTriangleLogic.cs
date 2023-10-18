@@ -10,7 +10,6 @@ public class DSTriangleLogic : MonoBehaviour
     public float MoveMaxSpace = 8.4f;
 
     private float currentTime;
-    private bool OffCollider;
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -37,7 +36,6 @@ public class DSTriangleLogic : MonoBehaviour
                 Invoke("SetTrigger", 0.25f);
                 currentTime = 0;
             }
-
         }
     }
     private void SetVelcity()
@@ -84,5 +82,4 @@ public class DSTriangleLogic : MonoBehaviour
             TranTriangle.position = new Vector3(MoveMaxSpace, TranTriangle.position.y, TranTriangle.position.z);
         }
     }
-
 }
