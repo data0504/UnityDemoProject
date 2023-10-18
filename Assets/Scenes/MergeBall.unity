@@ -378,7 +378,10 @@ MonoBehaviour:
   - {fileID: 3334098251546060727, guid: 8313a53aad88f75468b207c48cacac18, type: 3}
   MoveSpeed: 0.03
   MoveMax: 3.95
-  BallScale: 
+  ballScale:
+  - 1.5
+  - 2
+  - 2.5
 --- !u!212 &764100680
 SpriteRenderer:
   m_ObjectHideFlags: 0

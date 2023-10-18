@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3334098251546060725}
   - component: {fileID: 3334098251546060724}
   - component: {fileID: 2926372317604264463}
+  - component: {fileID: 3362041183072531219}
   m_Layer: 0
   m_Name: CircleG
   m_TagString: Untagged
@@ -136,11 +137,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df57316922ef42c4da43bd77845a4625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PutRange: {fileID: 0}
+  CircleView: {fileID: 3362041183072531219}
+--- !u!114 &3362041183072531219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3334098251546060727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bee8dd765c7afe43b84715d3cf691a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjSelf: {fileID: 3334098251546060727}
   perfabArrayList:
   - {fileID: 3334098251546060727, guid: 3f8cd9a2e1c27734fa3612b28c49942d, type: 3}
   - {fileID: 3334098251546060727}
   - {fileID: 3334098251546060727, guid: 8313a53aad88f75468b207c48cacac18, type: 3}
-  PrefabCircleR: {fileID: 3334098251546060727, guid: 3f8cd9a2e1c27734fa3612b28c49942d, type: 3}
-  PrefabCircleG: {fileID: 3334098251546060727}
-  PrefabCircleB: {fileID: 3334098251546060727, guid: 8313a53aad88f75468b207c48cacac18, type: 3}
