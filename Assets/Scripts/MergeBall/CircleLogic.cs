@@ -1,24 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CircleLogic : MonoBehaviour
 {
-    public Transform PutRange;
-    public GameObject PrefabCircleR;
-    public GameObject PrefabCircleG;
-    public GameObject PrefabCircleB;
-    private bool offLock = false;
-    void OnCollisionEnter2D(Collision2D collision)
+    public GameObject[] perfabArrayList = new GameObject[3];
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == PrefabCircleR.name)
+        if (collision.gameObject.name == perfabArrayList[0].name && gameObject.name == perfabArrayList[0].name)
         {
             DestroySelf();
             CreateNewBall(collision,1);
         }
 
-        if (collision.gameObject.name == PrefabCircleG.name)
+        if (collision.gameObject.name == perfabArrayList[1].name && gameObject.name == perfabArrayList[1].name)
         {
             DestroySelf();
             CreateNewBall(collision, 2);
