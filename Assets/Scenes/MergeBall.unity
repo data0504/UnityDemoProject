@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 283103152}
   m_Layer: 0
-  m_Name: Game
+  m_Name: MergeBallGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 764100678}
   - component: {fileID: 764100680}
   - component: {fileID: 764100679}
+  - component: {fileID: 764100681}
   m_Layer: 0
   m_Name: PutMachine
   m_TagString: Untagged
@@ -350,7 +351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764100677}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -3, y: 3.22, z: 0}
+  m_LocalPosition: {x: 0, y: 3.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -369,19 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766e0bd27bc77cb479d96e150d2e9b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PutMachineClip: {fileID: 1929216987}
-  TransPutMachine: {fileID: 764100678}
-  TransPutRange: {fileID: 1403828522}
-  PrefabList:
-  - {fileID: 3334098251546060727, guid: 3f8cd9a2e1c27734fa3612b28c49942d, type: 3}
-  - {fileID: 3334098251546060727, guid: 4cff6ac7fe642ce4788b564bf64a223f, type: 3}
-  - {fileID: 3334098251546060727, guid: 8313a53aad88f75468b207c48cacac18, type: 3}
-  MoveSpeed: 0.03
-  MoveMax: 3.95
-  ballScale:
-  - 1.5
-  - 2
-  - 2.5
+  putMachineView: {fileID: 764100681}
 --- !u!212 &764100680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -434,6 +423,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &764100681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764100677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33ddb309f2c13a4f82ccbedfeac03eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PutMachineClip: {fileID: 1929216987}
+  TransPutMachine: {fileID: 764100678}
+  TransPutRange: {fileID: 1403828522}
+  PrefabList:
+  - {fileID: 3334098251546060727, guid: 3f8cd9a2e1c27734fa3612b28c49942d, type: 3}
+  - {fileID: 3334098251546060727, guid: 4cff6ac7fe642ce4788b564bf64a223f, type: 3}
+  - {fileID: 3334098251546060727, guid: 8313a53aad88f75468b207c48cacac18, type: 3}
 --- !u!1 &873770558
 GameObject:
   m_ObjectHideFlags: 0
