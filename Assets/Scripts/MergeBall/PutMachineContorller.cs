@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PutMachineContorller : MonoBehaviour
@@ -33,14 +34,16 @@ public class PutMachineContorller : MonoBehaviour
     {
         PutPrefabObj();
         MovePutMachine();
+        MoveMaxPutMachine();
     }
+
+
     public void PutPrefabObj()
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
             putMachineView.AddclipBall(putMachineModel.BallScaleList);
         }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             putMachineView.PushOnClipBall();
@@ -51,20 +54,21 @@ public class PutMachineContorller : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             putMachineView.MoveLeft(putMachineModel.MoveSpeed);
-
-            if (putMachineModel.CheckMoveLeftMax(putMachineView.gameObject.transform))
-            {
-                putMachineView.MoveMaxLeft(putMachineModel.MoveMax);
-            }
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             putMachineView.MoveRight(putMachineModel.MoveSpeed);
-
-            if (putMachineModel.CheckMoveRightMax(putMachineView.gameObject.transform))
-            {
-                putMachineView.MoveMaxRight(putMachineModel.MoveMax);
-            }
+        }
+    }
+    private void MoveMaxPutMachine()
+    {
+        if (putMachineModel.CheckMoveLeftMax(putMachineView.gameObject.transform))
+        {
+            putMachineView.MoveMaxLeft(putMachineModel.MoveMax);
+        }
+        if (putMachineModel.CheckMoveRightMax(putMachineView.gameObject.transform))
+        {
+            putMachineView.MoveMaxRight(putMachineModel.MoveMax);
         }
     }
 }
