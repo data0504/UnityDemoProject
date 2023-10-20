@@ -472,33 +472,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1835812514}
-  - component: {fileID: 1835812513}
+  - component: {fileID: 1835812516}
+  - component: {fileID: 1835812515}
   m_Layer: 0
-  m_Name: ExchangeCupLogic
+  m_Name: ExchangeCupController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1835812513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835812512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2854002dfa4cc1447a0ae54eac8c6e27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Down: {fileID: 7400000, guid: 15bb69b2c113fd34eaf124c1fcfcb635, type: 2}
-  Up: {fileID: 7400000, guid: 1a360c9e734ac5f49ac713b64d62f947, type: 2}
-  Switch12: {fileID: 7400000, guid: 00edb8a4322ae51409ded01a4755f806, type: 2}
-  Switch23: {fileID: 7400000, guid: 0930413de9b4e0944a06d2ebdf90f5e1, type: 2}
-  Switch123: {fileID: 7400000, guid: 9465b1c224d26764dbb5a8330de51a0f, type: 2}
-  AnimaObj: {fileID: 1367693493}
-  Circle: {fileID: 2107984726}
 --- !u!4 &1835812514
 Transform:
   m_ObjectHideFlags: 0
@@ -514,6 +496,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1835812515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835812512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc0531586fd6094e926f525df43d74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimaObj: {fileID: 1367693493}
+  Up: {fileID: 7400000, guid: 1a360c9e734ac5f49ac713b64d62f947, type: 2}
+  Down: {fileID: 7400000, guid: 15bb69b2c113fd34eaf124c1fcfcb635, type: 2}
+  Switch12: {fileID: 7400000, guid: 00edb8a4322ae51409ded01a4755f806, type: 2}
+  Switch23: {fileID: 7400000, guid: 0930413de9b4e0944a06d2ebdf90f5e1, type: 2}
+  Switch123: {fileID: 7400000, guid: 9465b1c224d26764dbb5a8330de51a0f, type: 2}
+  Circle: {fileID: 2107984726}
+--- !u!114 &1835812516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835812512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2854002dfa4cc1447a0ae54eac8c6e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exchangeCupView: {fileID: 1835812515}
 --- !u!1 &1987444504
 GameObject:
   m_ObjectHideFlags: 0
