@@ -42,7 +42,7 @@ public class PutMachineContorller : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            putMachineView.AddclipBall(putMachineModel.BallScaleList);
+            putMachineView.RefullBall(putMachineModel.BallScaleList);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

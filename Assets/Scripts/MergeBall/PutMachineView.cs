@@ -18,10 +18,10 @@ public class PutMachineView : MonoBehaviour
     {
         for (int i = 0; i < clip.Length; i++)
         {
-            AddclipBall(ballScaleList);
+            RefullBall(ballScaleList);
         }
     }
-    public void AddclipBall(float[] ballScaleList)
+    public void RefullBall(float[] ballScaleList)
     {
         int RandomBall = Random.Range(0, PrefabList.Length);
 
