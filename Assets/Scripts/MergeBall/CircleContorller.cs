@@ -1,11 +1,17 @@
+using System;
 using UnityEngine;
 
 public class CircleContorller : MonoBehaviour
 {
-    public CircleModel CircleModel = new CircleModel();
-    public CircleView CircleView = new CircleView();
+    private CircleModel CircleModel = new CircleModel();
+    [SerializeField]private CircleView CircleView;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Start()
+    {
+        CircleView.RegisterCollisionOtherBall(RegisterCollisionOtherBall);
+    }
+
+    private void RegisterCollisionOtherBall(Collision2D collision)
     {
         if (CircleModel.CheckSameCollsionName(collision.gameObject.name, CircleView.gameObject.name, CircleView.PerfabList))
         {

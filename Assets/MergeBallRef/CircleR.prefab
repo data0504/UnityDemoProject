@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bee8dd765c7afe43b84715d3cf691a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjSelf: {fileID: 3334098251546060727}
   perfabArrayList:
   - {fileID: 3334098251546060727}
   - {fileID: 3334098251546060727, guid: 4cff6ac7fe642ce4788b564bf64a223f, type: 3}
   - {fileID: 3334098251546060727, guid: 8313a53aad88f75468b207c48cacac18, type: 3}
+  circleContorller: {fileID: 0}
